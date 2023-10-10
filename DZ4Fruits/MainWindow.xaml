@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DZ4Fruits"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="1200" FontSize="20">
     <Grid>
-        
+        <Grid.Background>
+            <SolidColorBrush Color="Azure"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2
+                              *"/>
+        </Grid.ColumnDefinitions>
+        <!-- меню навигации -->
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Actions" FontSize="25" Grid.Row="0" Width="100" HorizontalAlignment="Center">
+                <MenuItem Name="bdConnectionTest" Header="dbConnectionTest" Click="testDbConnection_Click"/>
+                <MenuItem Name="viewAllName" Header="viewAllName" Click="viewAllName"/>
+            </MenuItem>
+        </Menu>
+        <!-- отображение режультата -->
+        <ListBox x:Name="frutsListBox" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" 
+                 MouseDoubleClick="frutsListBox_MouseDoubleClick" SelectedValue="{Binding SelectedItem}"/>
+        <!-- список свойств элемента -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center">
+            <Label Content="Name:" Margin="1"/>
+            <TextBox x:Name="addNameTextBox" Width="150" Margin="1"/>
+            <Label Content="Type:" Margin="1"/>
+            <TextBox x:Name="addTypeTextBox" Width="150" Margin="1"/>
+            <Label Content="Color:" Margin="1"/>
+            <TextBox x:Name="addColorTextBox" Width="150" Margin="1"/>
+            <Label Content="Calorie:" Margin="1"/>
+            <TextBox x:Name="addCalorieTextBox" Width="150" Margin="1"/>
+        </StackPanel>
+        <!-- кнопки управления -->
+        <Button x:Name="addButton" Content="Add" Width="130" Height="50" Margin="10" 
+                Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"
+                Click="addButton_Click"/>
+         
+        <Button x:Name="delButton" Content="Delete" Width="130" Height="50" Margin="10" 
+                Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"
+                Click="delButton_Click"/>
+        <Button x:Name="updateButton" Content="Update" Width="130" Height="50" Margin="10" 
+                Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
+                Click="updateButton_Click"/>
+
     </Grid>
 </Window>
