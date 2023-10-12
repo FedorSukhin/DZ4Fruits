@@ -73,6 +73,7 @@
     <Compile Include="Model\DBConnectionProvider.cs" />
     <Compile Include="Model\DBFruitClient.cs" />
     <Compile Include="Model\FruitsVegetable.cs" />
+    <Compile Include="Model\NameFV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

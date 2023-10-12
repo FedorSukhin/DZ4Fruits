@@ -32,7 +32,28 @@ namespace DZ4Fruits
             fvtemp = new FruitsVegetable();
         }
 
-        //проверка соединения 
+        // обнавление листu
+        private void updateFVList()
+        {
+            try
+            {
+                // обновление списка объектов (можно придумать рациональный способ)
+                List<FruitsVegetable> frutveg = dbfruitClient.SelectAll();
+                frutsListBox.Items.Clear();
+                frutveg.ForEach(frutveget => frutsListBox.Items.Add(frutveget));
+                maxCalorie();
+                minCalorie();
+                avgCalorie();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        //Menu
+        //1 проверка соединения 
         private void testDbConnection_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -49,14 +70,17 @@ namespace DZ4Fruits
                 MessageBox.Show($"Connection error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        // обнавление листа
-        private void updateFVList()
+        //2 обработка команды отобразить все
+        private void viewAllFV_Click(object sender, RoutedEventArgs e)
+        {
+            updateFVList();
+        }
+        //3 обработка команды вывести все названия
+        private void viewAllName1(object sender, RoutedEventArgs e)
         {
             try
             {
-                // обновление списка объектов (можно придумать рациональный способ)
-                List<FruitsVegetable> frutveg = dbfruitClient.SelectAll();
+                List<NameFV> frutveg = dbfruitClient.AllName();
                 frutsListBox.Items.Clear();
                 frutveg.ForEach(frutveget => frutsListBox.Items.Add(frutveget));
             }
@@ -65,18 +89,72 @@ namespace DZ4Fruits
                 MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        //4 вывести все цвета
+        private void viewAllColor_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                List<NameFV> frutveg = dbfruitClient.AllColor();
+                frutsListBox.Items.Clear();
+                frutveg.ForEach(frutveget => frutsListBox.Items.Add(frutveget));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // отображение калорийности
+
+        private void maxCalorie()
+        {
+            try
+            {
+                MaxTextBox.Text = Convert.ToString(dbfruitClient.MaxCalorie());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void minCalorie()
+        {
+            try
+            {
+                MinTextBox.Text = Convert.ToString(dbfruitClient.MinCalorie());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void avgCalorie()
+        {
+            try
+            {
+                AvgTextBox.Text = Convert.ToString(dbfruitClient.AVGCalorie());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // отработка кнопок
         // выделение одного объекта листа
         private void frutsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try 
-            {                 
+            try
+            {
                 var selectedItem = frutsListBox.SelectedItem as FruitsVegetable;
                 // Проверяем, что элемент не пустой
                 if (selectedItem != null)
                 {
-                    addNameTextBox.Text=selectedItem.Name;
-                    addTypeTextBox.Text=selectedItem.Type;
-                    addColorTextBox.Text=selectedItem.Color;
+                    addNameTextBox.Text = selectedItem.Name;
+                    addTypeTextBox.Text = selectedItem.Type;
+                    addColorTextBox.Text = selectedItem.Color;
                     addCalorieTextBox.Text = selectedItem.Calorie.ToString();
                     fvtemp = selectedItem;
                 }
@@ -95,7 +173,7 @@ namespace DZ4Fruits
                 string type = addTypeTextBox.Text;
                 string color = addColorTextBox.Text;
                 int calorie = Convert.ToInt32(addCalorieTextBox.Text);
-                FruitsVegetable fruitsVegetable = new FruitsVegetable() {Name = name, Type = type, Color = color, Calorie = calorie };
+                FruitsVegetable fruitsVegetable = new FruitsVegetable() { Name = name, Type = type, Color = color, Calorie = calorie };
                 dbfruitClient.AddFruitVegetable(fruitsVegetable);
                 updateFVList();
             }
@@ -131,19 +209,6 @@ namespace DZ4Fruits
                 MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        // обработка команды вывести все названия
-        private void viewAllName()
-        {
-            try 
-            {
-                List<FruitsVegetable> frutveg = dbfruitClient.AllName();
-                frutsListBox.Items.Clear();
-                frutveg.ForEach(frutveget => frutsListBox.Items.Add(frutveget));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+
     }
 }

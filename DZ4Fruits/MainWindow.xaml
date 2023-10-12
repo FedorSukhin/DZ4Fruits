@@ -28,7 +28,10 @@
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Actions" FontSize="25" Grid.Row="0" Width="100" HorizontalAlignment="Center">
                 <MenuItem Name="bdConnectionTest" Header="dbConnectionTest" Click="testDbConnection_Click"/>
-                <MenuItem Name="viewAllName" Header="viewAllName" Click="viewAllName"/>
+                <MenuItem Name="viewAllFV" Header="viewAllFV" Click="viewAllFV_Click"/>
+                <MenuItem Name="viewAllName" Header="viewAllName" Click="viewAllName1"/>
+                <MenuItem Name="viewAllColor" Header="viewAllColor" Click="viewAllColor_Click"/>
+                
             </MenuItem>
         </Menu>
         <!-- отображение режультата -->
@@ -56,6 +59,15 @@
         <Button x:Name="updateButton" Content="Update" Width="130" Height="50" Margin="10" 
                 Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"
                 Click="updateButton_Click"/>
-
+        <!-- калорийность -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center">
+            <Label Content="Max:" Margin="1"/>
+            <TextBox x:Name="MaxTextBox" Width="150" Margin="1"/>
+            <Label Content="Min:" Margin="1"/>
+            <TextBox x:Name="MinTextBox" Width="150" Margin="1"/>
+            <Label Content="AVG:" Margin="1"/>
+            <TextBox x:Name="AvgTextBox" Width="150" Margin="1"/>
+            
+        </StackPanel>
     </Grid>
 </Window>
