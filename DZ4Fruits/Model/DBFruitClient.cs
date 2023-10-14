@@ -25,7 +25,7 @@ namespace DZ4Fruits.Model
         {
             using (SqlConnection connection = connectionProvider.OpenDbConnection())
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Fruits_Vegetables_t;", connection);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Fruits_Vegetables_t order by id;", connection);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     // считать строки результат в List<FruitsVegetable>
@@ -155,7 +155,43 @@ namespace DZ4Fruits.Model
                 return (int)cmd.ExecuteScalar();
             }
         }
+        // 10. колличество овощей
 
+        public int CountVegetable()
+        {
+            using (SqlConnection connection = connectionProvider.OpenDbConnection())
+            {
+                SqlCommand cmd = new SqlCommand(
+                     "select count(*) from Fruits_Vegetables_t where Type_f like 'vegetable' or Type_f like 'Vegetable';",
+                    connection);
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+        // 11. колличество фруктов
+
+        public int CountFruit()
+        {
+            using (SqlConnection connection = connectionProvider.OpenDbConnection())
+            {
+                SqlCommand cmd = new SqlCommand(
+                     "select count(*) from Fruits_Vegetables_t where Type_f like 'Fruit' or Type_f like 'fruit';",
+                    connection);
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+        // 12. показать колличество овощей и фруктов заданного цвета
+
+        public int CountColor(string color)
+        {
+            using (SqlConnection connection = connectionProvider.OpenDbConnection())
+            {
+                SqlCommand cmd = new SqlCommand(
+                     "select count(*) from Fruits_Vegetables_t where Color_f like @color;",
+                    connection);
+                cmd.Parameters.Add("@color", System.Data.SqlDbType.NVarChar).Value = color;
+                return (int)cmd.ExecuteScalar();
+            }
+        }
         // ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
 
         // 1. конвертация строки результата в объект FruitsVegetable

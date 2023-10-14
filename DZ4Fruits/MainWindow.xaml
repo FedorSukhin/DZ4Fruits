@@ -36,7 +36,7 @@
         </Menu>
         <!-- отображение режультата -->
         <ListBox x:Name="frutsListBox" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" 
-                 MouseDoubleClick="frutsListBox_MouseDoubleClick" SelectedValue="{Binding SelectedItem}"/>
+                 MouseDoubleClick="frutsListBox_MouseDoubleClick"/>
         <!-- список свойств элемента -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center">
             <Label Content="Name:" Margin="1"/>
@@ -66,8 +66,22 @@
             <Label Content="Min:" Margin="1"/>
             <TextBox x:Name="MinTextBox" Width="150" Margin="1"/>
             <Label Content="AVG:" Margin="1"/>
-            <TextBox x:Name="AvgTextBox" Width="150" Margin="1"/>
-            
+            <TextBox x:Name="AvgTextBox" Width="150" Margin="1"/>            
         </StackPanel>
+        <!-- запрос с параметром-->
+        <Label Grid.Row="4" Grid.Column="1" Content="Query:" Margin="1"/>
+        <ComboBox  Name="qweryChois" Height="35" Grid.Row="4" Grid.Column="1" SelectionChanged="qweryChois_SelectionChanged">
+            <ComboBoxItem Name="countVeg" Content="Veg count" IsSelected="True" />
+            <ComboBoxItem Name="countFruit" Content="Fruit count"/>
+            <ComboBoxItem Name="colorFV" Content="Color FV"/>
+        </ComboBox>
+        <Label Grid.Row="5" Grid.Column="1" Content="Parametr:" Margin="1"/>
+        <TextBox x:Name="qweryParam" Grid.Row="5" Grid.Column="1" Height="35" Margin="1"/>
+        <Button x:Name="resultButton" Content="Result" Width="130" Height="50"  
+                Grid.Row="6" Grid.Column="1" VerticalAlignment="Top"
+                Click="resultButton_Click"/>
+        <TextBox x:Name="qweryResult" Grid.Row="6" Grid.Column="1" Height="35" Margin="1" VerticalAlignment="Bottom"/>            
+        
+        
     </Grid>
 </Window>

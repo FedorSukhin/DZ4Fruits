@@ -7,5 +7,12 @@
 
  delete from Fruits_Vegetables_t
  where id=2
+
+select avg(Calorie_f)
+from Fruits_Vegetables_t
+select count(*) from Fruits_Vegetables_t where Type_f like 'vegetable' or Type_f like 'Vegetable'
 select * from Fruits_Vegetables_t
+order by id
+
  select DISTINCT Name_f from Fruits_Vegetables_t
+

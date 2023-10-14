@@ -24,6 +24,7 @@ namespace DZ4Fruits
     {
         private DBFruitClient dbfruitClient;
         private FruitsVegetable fvtemp;
+        private int qweryItem;
         public MainWindow()
         {
             dbfruitClient = new DBFruitClient(new DbConnectionProvider());
@@ -210,5 +211,35 @@ namespace DZ4Fruits
             }
         }
 
+        private void resultButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string vegcount = "Veg count";
+                string fruitcount = "Fruit count";
+                string colorFV = "Color FV";
+                if (qweryItem ==0) 
+                {
+                    qweryResult.Text=Convert.ToString(dbfruitClient.CountVegetable());
+                }
+                if (qweryItem == 1)
+                {
+                    qweryResult.Text = Convert.ToString(dbfruitClient.CountFruit());
+                }
+                if (qweryItem == 2)
+                {
+                    qweryResult.Text = Convert.ToString(dbfruitClient.CountColor(qweryParam.Text));
+                }
+            }
+            catch (Exception ex )
+            {
+                MessageBox.Show($"Error during select object list: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void qweryChois_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            qweryItem = qweryChois.SelectedIndex;
+        }
     }
 }
